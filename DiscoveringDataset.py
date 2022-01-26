@@ -34,7 +34,7 @@ class DiscoverDict:
             else:
                 self.dictionary["smoker"][smoker_index] = 0
 
-    def num_of_subjects(self, field = "age"):
+    def num_of_subjects(self, field="age"):
         """
         Return number of subjects base on chosen field
 
@@ -45,7 +45,7 @@ class DiscoverDict:
         """
         return len(self.dictionary[field])
 
-    def average_age(self,field = "age" ):
+    def average_age(self, field="age"):
         """
         Will calculate average age of subjects.
 
@@ -61,7 +61,7 @@ class DiscoverDict:
         avg_age = total_age / self.length
         return avg_age
 
-    def average_age_children(self, num_of_children: int, field_ch = "children", field_a= "age" ):
+    def average_age_children(self, num_of_children: int, field_ch="children", field_a="age"):
         """
         Will calculate average age of subjects with specified number of children.
 
@@ -76,7 +76,7 @@ class DiscoverDict:
         """
         total_age = 0
         num_of_people = 0
-        for children,age in zip(self.dictionary[field_ch],self.dictionary[field_a]):
+        for children, age in zip(self.dictionary[field_ch], self.dictionary[field_a]):
             if int(children) == num_of_children:
                 total_age += int(age)
                 num_of_people += 1
@@ -87,7 +87,7 @@ class DiscoverDict:
 
         return num_of_people, avg_age, num_of_children
 
-    def region_count(self,field="region"):
+    def region_count(self, field="region"):
         """
         Returns number of subjects per region.
 
@@ -97,10 +97,10 @@ class DiscoverDict:
         :rtype: dict
         """
         regions = set(self.dictionary[field])
-        regions_count = {x:0 for x in regions}
+        regions_count = {x: 0 for x in regions}
 
         for region in self.dictionary[field]:
-            regions_count[region] +=1
+            regions_count[region] += 1
         return regions_count
 
     def average_cost(self, field="charges"):
@@ -115,10 +115,10 @@ class DiscoverDict:
         total_cost = 0
         for cost in self.dictionary[field]:
             total_cost += float(cost)
-        average_cost = total_cost/self.length
+        average_cost = total_cost / self.length
         return average_cost
 
-    def difference_smoker_non_smoker(self, field_charge = "charges", field_smoker= "smoker"):
+    def difference_smoker_non_smoker(self, field_charge="charges", field_smoker="smoker"):
         """
         Calculate difference between cost of insurance smoker and non_smoker.
 
@@ -137,22 +137,21 @@ class DiscoverDict:
 
         num_of_smokers = 0
         num_of_non_smokers = 0
-        for smoker,cost in zip(self.dictionary[field_smoker],self.dictionary[field_charge]):
+        for smoker, cost in zip(self.dictionary[field_smoker], self.dictionary[field_charge]):
             if smoker == 0:
                 total_cost_non_smoker += float(cost)
-                num_of_non_smokers +=1
+                num_of_non_smokers += 1
             else:
                 total_cost_smoker += float(cost)
-                num_of_smokers +=1
+                num_of_smokers += 1
 
-
-        average_non_smoker = total_cost_non_smoker/num_of_non_smokers
-        average_smoker = total_cost_smoker/num_of_smokers
+        average_non_smoker = total_cost_non_smoker / num_of_non_smokers
+        average_smoker = total_cost_smoker / num_of_smokers
         difference_in_cost = average_smoker - average_non_smoker
 
-        return num_of_smokers,num_of_non_smokers,average_smoker,average_non_smoker,difference_in_cost
+        return num_of_smokers, num_of_non_smokers, average_smoker, average_non_smoker, difference_in_cost
 
-    def average_bmi(self, field = "bmi"):
+    def average_bmi(self, field="bmi"):
         """
         Calculate average BMI in dataset.
 
@@ -165,11 +164,11 @@ class DiscoverDict:
 
         for bmi in self.dictionary[field]:
             total_bmi += float(bmi)
-        average_bmi = total_bmi/self.length
+        average_bmi = total_bmi / self.length
 
         return average_bmi
 
-    def average_custom(self,field):
+    def average_custom(self, field):
         """
         Custom function to calculate average of data by your choice.
 
@@ -184,12 +183,6 @@ class DiscoverDict:
 
         for y in self.dictionary[field]:
             total_x += float(y)
-        average_x = total_x/self.length
+        average_x = total_x / self.length
 
         return average_x
-
-
-
-
-
-

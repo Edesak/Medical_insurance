@@ -1,7 +1,7 @@
 import csv
 
 
-def prepare (name_of_csv: str):
+def prepare(name_of_csv: str):
     """
     Simple function to prepare CSV.
 
@@ -19,4 +19,4 @@ def prepare (name_of_csv: str):
         for row in insurance_reader:
             for field in fieldnames:
                 insurance_dict[field].append(row[field])
-    return  insurance_dict
+    return insurance_dict
