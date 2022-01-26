@@ -34,40 +34,41 @@ class DiscoverDict:
             else:
                 self.dictionary["smoker"][smoker_index] = 0
 
-    def num_of_subjects(self):
+    def num_of_subjects(self, field = "age"):
         """
+        Return number of subjects base on chosen field
+
+        :parameter field: Choose field for count the subjects
 
         :return: number of subjects
         :rtype: int
         """
-        return len(self.dictionary["age"])
+        return len(self.dictionary[field])
 
-    def average_age(self):
+    def average_age(self,field = "age" ):
         """
         Will calculate average age of subjects.
-        Dictionary must have keyword "age".
+
+        :parameter field: field where are data about age
 
         :returns: average_age
         :rtype: float
 
         """
         total_age = 0
-        for age in self.dictionary["age"]:
+        for age in self.dictionary[field]:
             total_age += int(age)
         avg_age = total_age / self.length
         return avg_age
 
-    def average_age_children(self, num_of_children: int):
+    def average_age_children(self, num_of_children: int, field_ch = "children", field_a= "age" ):
         """
         Will calculate average age of subjects with specified number of children.
 
-        Dictionary must have keyword "age".
-
-        Dictionary must have keyword "children".
-
         :param num_of_children: Choose how many children should subject have
         :type: int
-
+        :param field_ch: Choose field where are data about children
+        :param field_a: Choose field where are data about age
 
         :return: (number_of_people, average_age, number_of_children)
 
@@ -75,7 +76,7 @@ class DiscoverDict:
         """
         total_age = 0
         num_of_people = 0
-        for children,age in zip(self.dictionary["children"],self.dictionary["age"]):
+        for children,age in zip(self.dictionary[field_ch],self.dictionary[field_a]):
             if int(children) == num_of_children:
                 total_age += int(age)
                 num_of_people += 1
@@ -86,40 +87,47 @@ class DiscoverDict:
 
         return num_of_people, avg_age, num_of_children
 
-    def region_count(self):
+    def region_count(self,field="region"):
         """
         Returns number of subjects per region.
+
+        :param field: Choose field where are data about region
 
         :return: counts_per_region
         :rtype: dict
         """
-        regions = set(self.dictionary["region"])
+        regions = set(self.dictionary[field])
         regions_count = {x:0 for x in regions}
 
-        for region in self.dictionary["region"]:
+        for region in self.dictionary[field]:
             regions_count[region] +=1
         return regions_count
 
-    def average_cost(self):
+    def average_cost(self, field="charges"):
         """
-        Calculate average cost of insurace.
+        Calculate average cost of insurance.
+
+        :param field: Choose field where are data about insurance charges
 
         :return: average_cost
         :rtype: float
         """
         total_cost = 0
-        for cost in self.dictionary["charges"]:
+        for cost in self.dictionary[field]:
             total_cost += float(cost)
         average_cost = total_cost/self.length
         return average_cost
 
-    def difference_smoker_non_smoker(self):
+    def difference_smoker_non_smoker(self, field_charge = "charges", field_smoker= "smoker"):
         """
-        Calculate difference between cost of insurace smoker and non_smoker.
+        Calculate difference between cost of insurance smoker and non_smoker.
 
         Taking formula of:
 
         difference = smoker - non_smoker
+
+        :param field_charge: Choose field where are data about insurance charges
+        :param field_smoker: Choose field where are data about smokers
 
         :return: (num_of_smokers,num_of_non_smokers,average_smoker,average_non_smoker,difference_in_cost)
         :rtype: tuple
@@ -129,7 +137,7 @@ class DiscoverDict:
 
         num_of_smokers = 0
         num_of_non_smokers = 0
-        for smoker,cost in zip(self.dictionary["smoker"],self.dictionary["charges"]):
+        for smoker,cost in zip(self.dictionary[field_smoker],self.dictionary[field_charge]):
             if smoker == 0:
                 total_cost_non_smoker += float(cost)
                 num_of_non_smokers +=1
@@ -144,20 +152,41 @@ class DiscoverDict:
 
         return num_of_smokers,num_of_non_smokers,average_smoker,average_non_smoker,difference_in_cost
 
-    def average_bmi(self):
+    def average_bmi(self, field = "bmi"):
         """
         Calculate average BMI in dataset.
+
+        :param field: Choose field where are data about BMI
 
         :return: average_bmi
         :rtype: float
         """
         total_bmi = 0
 
-        for bmi in self.dictionary["bmi"]:
+        for bmi in self.dictionary[field]:
             total_bmi += float(bmi)
         average_bmi = total_bmi/self.length
 
         return average_bmi
+
+    def average_custom(self,field):
+        """
+        Custom function to calculate average of data by your choice.
+
+
+        :param field: Choose field where data are.
+        :type field: str
+
+        :return: Average from data of your choice.
+        :rtype: float
+        """
+        total_x = 0
+
+        for y in self.dictionary[field]:
+            total_x += float(y)
+        average_x = total_x/self.length
+
+        return average_x
 
 
 
