@@ -172,7 +172,6 @@ class DiscoverDict:
         """
         Custom function to calculate average of data by your choice.
 
-
         :param field: Choose field where data are.
         :type field: str
 
